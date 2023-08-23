@@ -1,8 +1,7 @@
 import os
-import yaml
+import yaml# execute pip install pyyaml
 from ping_and_store import ping_store, clear_file#importing the ping state related functions from the ping_and_store file
-from getpass import getpass
-from mysql.connector import connect, Error
+from mysql.connector import connect, Error # execute pip install mysql-connector-python
 
 # database connection #######################################
 global connection
@@ -63,6 +62,7 @@ try:
         fetch_data(station_table, 'stations.yaml', 'station')
         fetch_data(equipment_table, 'equipments.yaml', 'equipment')
         # pinging on the fetched data
+        clear_file('elements.yaml')
         ping_store("switches.yaml", "sw")
         ping_store("stations.yaml", "st")
         ping_store("equipments.yaml", "eq")
@@ -99,6 +99,7 @@ try:
                     else:
                         # else insert it
                         insert_data(name, type, ip, state)
+                clear_file('elements.yaml')
         else:
             print("the file is empty")
 except Error as err:
